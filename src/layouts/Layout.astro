@@ -1,22 +1,42 @@
+---
+import logo from "../assets/logo.svg";
+import "../styles/global.css";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Rafael Negron</title>
+  </head>
+  <body class="m-0 w-full h-full container mx-auto p-4">
+    <header>
+      <img
+        alt="An anime-esque style drawing of a desk with a laptop on it."
+        class="mx-auto sm:m-0"
+        height="300"
+        src={logo.src}
+        width="300"
+      />
+      <nav>
+        <ul
+          class="flex flex-col gap-2 sm:gap-8 sm:flex-row text-center sm:text-left"
+        >
+          <li><a class="underline" href="/">Home</a></li>
+          <li>
+            <a class="underline" href="/guide"
+              >Declassified Career Survival Guide</a>
+          </li>
+          <li><a class="underline" href="#">Blog</a></li>
+        </ul>
+      </nav>
+    </header>
+    <slot />
+    <footer class="mt-8">
+      <p>&copy; 2025 Rafael Negron</p>
+    </footer>
+  </body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
