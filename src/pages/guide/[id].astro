@@ -1,5 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { Clock } from "@lucide/astro";
+import Prose from "../../components/Prose.astro";
 
 import { getCollection, render } from "astro:content";
 
@@ -11,12 +13,19 @@ export async function getStaticPaths() {
   }));
 }
 const { guideEntry } = Astro.props;
-const { Content } = await render(guideEntry);
+const { Content, remarkPluginFrontmatter } = await render(guideEntry);
 ---
 
 <Layout>
-  <article class="prose mt-8 flex flex-col items-center text-center">
-    <h1>{guideEntry.data.title}</h1>
-    <Content />
-  </article>
+  <Prose>
+    <article>
+      <!-- <article class="prose mt-8 flex flex-col items-center text-center"> -->
+      <h1>{guideEntry.data.title}</h1>
+      <div class="flex gap-2 items-center">
+        <Clock />
+        <p>{remarkPluginFrontmatter.minutesRead}</p>
+      </div>
+      <Content />
+    </article>
+  </Prose>
 </Layout>

@@ -1,7 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import Analytics from "@vercel/analytics/astro";
 
-import logo from "../assets/logo.svg";
 import "../styles/global.css";
 
 const currentPath = Astro.url.pathname;
@@ -14,6 +14,12 @@ const currentPath = Astro.url.pathname;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content="Rafael Negron" />
+    <meta property="og:type" content="blog" />
+    <meta property="og:description" content="My little nook in the internet." />
+    <meta property="og:image" content="https://rafaelnegron.me/logo.svg" />
+    <meta property="og:url" content="https://rafaelnegron.me/" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Rafael Negron</title>
   </head>
   <body
@@ -24,7 +30,7 @@ const currentPath = Astro.url.pathname;
         alt="An anime-esque style drawing of a desk with a laptop on it."
         class="mx-auto"
         height="300"
-        src={logo.src}
+        src="https://rafaelnegron.me/logo.svg"
         width="300"
       />
       <nav>
@@ -47,6 +53,7 @@ const currentPath = Astro.url.pathname;
     <footer class="mt-8">
       <p>&copy; 2025 Rafael Negron</p>
     </footer>
+    <Analytics />
   </body>
 </html>
 
