@@ -47,7 +47,7 @@ import Layout from "../layouts/Layout.astro";
     <section class="flex flex-col gap-8">
       {
         guide.map((guideEntry) => (
-          <article class="bg-white shadow-md rounded-xl border border-gray-200 p-6 transition hover:shadow-xl max-w-prose">
+          <div class="bg-white shadow-md rounded-xl border border-gray-200 p-6 transition hover:shadow-xl max-w-prose">
             <div class="flex flex-col gap-2">
               <h2 class="text-2xl font-semibold text-gray-800 hover:text-blue-600 transition-colors">
                 <a href={`/guide/${guideEntry.id}`}>{guideEntry.data.title}</a>
@@ -58,7 +58,7 @@ import Layout from "../layouts/Layout.astro";
                 {new Date(guideEntry.data.pubDate).toLocaleDateString()}
               </p>
             </div>
-          </article>
+          </div>
         ))
       }
     </section>

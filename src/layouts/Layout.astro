@@ -36,7 +36,7 @@ const currentPath = Astro.url.pathname;
           </li>
           <li>
             <a
-              class={currentPath === "/guide" ? "font-bold underline" : ""}
+              class={currentPath.includes("guide") ? "font-bold underline" : ""}
               href="/guide">Declassified Career Survival Guide</a
             >
           </li>
