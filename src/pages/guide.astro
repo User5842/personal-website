@@ -1,10 +1,13 @@
 ---
+import { getCollection } from "astro:content";
+const guide = await getCollection("guide");
+
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <main class="max-w-prose">
-    <section class="mt-8 flex flex-col gap-8">
+  <main class="max-w-prose flex flex-col gap-8 mt-8">
+    <section class="flex flex-col gap-8">
       <h1 class="text-3xl">The Declassified Career Survival Guide.</h1>
       <p>
         I have tried creating content on YouTube for many years. I made videos
@@ -40,6 +43,18 @@ import Layout from "../layouts/Layout.astro";
         job and grow within their careers. I hope this content can help someone
         out there.
       </p>
+    </section>
+    <section>
+      {
+        guide.map((guideEntry) => (
+          <article class="shadow-lg p-4">
+            <h2>
+              <a href={`/guide/${guideEntry.id}`}>{guideEntry.data.title}</a>
+            </h2>
+            <p>{guideEntry.data.description}</p>
+          </article>
+        ))
+      }
     </section>
   </main>
 </Layout>
