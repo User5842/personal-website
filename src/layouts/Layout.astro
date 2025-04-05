@@ -33,18 +33,25 @@ const currentPath = Astro.url.pathname;
         src="https://rafaelnegron.me/logo.svg"
         width="300"
       />
-      <nav>
-        <ul class="flex flex-col gap-2 sm:gap-8 sm:flex-row items-center">
+      <nav class="w-full border-b border-gray-200 bg-white">
+        <ul
+          class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 sm:gap-8 px-4 py-4 text-lg"
+        >
           <li>
-            <a class={currentPath === "/" ? "font-bold underline" : ""} href="/"
-              >Home</a
+            <a
+              href="/"
+              class={`transition-colors hover:text-blue-600 ${currentPath === "/" ? "font-semibold text-blue-700 underline" : "text-gray-700"}`}
             >
+              Home
+            </a>
           </li>
           <li>
             <a
-              class={currentPath.includes("guide") ? "font-bold underline" : ""}
-              href="/guide">Declassified Career Survival Guide</a
+              href="/guide"
+              class={`transition-colors hover:text-blue-600 ${currentPath.includes("guide") ? "font-semibold text-blue-700 underline" : "text-gray-700"}`}
             >
+              Declassified Career Survival Guide
+            </a>
           </li>
         </ul>
       </nav>

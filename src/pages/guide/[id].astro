@@ -18,9 +18,8 @@ const { Content, remarkPluginFrontmatter } = await render(guideEntry);
 
 <Layout>
   <Prose>
-    <article>
-      <!-- <article class="prose mt-8 flex flex-col items-center text-center"> -->
-      <h1>{guideEntry.data.title}</h1>
+    <article class="mt-8">
+      <h1 class="text-center">{guideEntry.data.title}</h1>
       <div class="flex gap-2 items-center">
         <Clock />
         <p>{remarkPluginFrontmatter.minutesRead}</p>
