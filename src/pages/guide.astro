@@ -44,14 +44,20 @@ import Layout from "../layouts/Layout.astro";
         out there.
       </p>
     </section>
-    <section>
+    <section class="flex flex-col gap-8">
       {
         guide.map((guideEntry) => (
-          <article class="shadow-lg p-4">
-            <h2>
-              <a href={`/guide/${guideEntry.id}`}>{guideEntry.data.title}</a>
-            </h2>
-            <p>{guideEntry.data.description}</p>
+          <article class="bg-white shadow-md rounded-xl border border-gray-200 p-6 transition hover:shadow-xl max-w-prose">
+            <div class="flex flex-col gap-2">
+              <h2 class="text-2xl font-semibold text-gray-800 hover:text-blue-600 transition-colors">
+                <a href={`/guide/${guideEntry.id}`}>{guideEntry.data.title}</a>
+              </h2>
+              <p class="text-gray-600">{guideEntry.data.description}</p>
+              <p class="text-sm text-gray-500 mt-2">
+                <span class="font-semibold">Published:</span>{" "}
+                {new Date(guideEntry.data.pubDate).toLocaleDateString()}
+              </p>
+            </div>
           </article>
         ))
       }
