@@ -1,6 +1,10 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
 import logo from "../assets/logo.svg";
 import "../styles/global.css";
+
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -12,25 +16,30 @@ import "../styles/global.css";
     <meta name="generator" content={Astro.generator} />
     <title>Rafael Negron</title>
   </head>
-  <body class="m-0 w-full h-full container mx-auto p-4">
+  <body
+    class="m-0 w-full h-full container mx-auto p-4 flex flex-col items-center"
+  >
     <header>
       <img
         alt="An anime-esque style drawing of a desk with a laptop on it."
-        class="mx-auto sm:m-0"
+        class="mx-auto"
         height="300"
         src={logo.src}
         width="300"
       />
       <nav>
-        <ul
-          class="flex flex-col gap-2 sm:gap-8 sm:flex-row text-center sm:text-left"
-        >
-          <li><a class="underline" href="/">Home</a></li>
+        <ul class="flex flex-col gap-2 sm:gap-8 sm:flex-row items-center">
           <li>
-            <a class="underline" href="/guide"
-              >Declassified Career Survival Guide</a>
+            <a class={currentPath === "/" ? "font-bold underline" : ""} href="/"
+              >Home</a
+            >
           </li>
-          <li><a class="underline" href="#">Blog</a></li>
+          <li>
+            <a
+              class={currentPath === "/guide" ? "font-bold underline" : ""}
+              href="/guide">Declassified Career Survival Guide</a
+            >
+          </li>
         </ul>
       </nav>
     </header>
@@ -40,3 +49,5 @@ import "../styles/global.css";
     </footer>
   </body>
 </html>
+
+<ClientRouter />
