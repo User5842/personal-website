@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 const guide = (await getCollection("guide")).sort(
   (guideOne, guideTwo) =>
-    guideOne.data.pubDate.getTime() - guideTwo.data.pubDate.getTime()
+    guideOne.data.pubDate.getTime() - guideTwo.data.pubDate.getTime(),
 );
 
 import Layout from "../layouts/Layout.astro";
@@ -118,7 +118,7 @@ import Layout from "../layouts/Layout.astro";
 <script>
   const input = document.getElementById("search-filter") as HTMLInputElement;
   const guides = document.querySelectorAll(
-    "#guide-list > div"
+    "#guide-list > div",
   ) as NodeListOf<HTMLDivElement>;
 
   input.addEventListener("input", () => {

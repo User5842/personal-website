@@ -17,6 +17,7 @@ export default defineConfig({
     ],
     remarkPlugins: [remarkReadingTime],
   },
+  site: "https://rafaelnegron.me/",
   vite: {
     plugins: [tailwindcss()],
   },
