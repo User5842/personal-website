@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Analytics from "@vercel/analytics/astro";
+import { Github, Mail, Youtube } from "@lucide/astro";
 
 import "../styles/global.css";
 
@@ -10,16 +11,25 @@ const currentPath = Astro.url.pathname;
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="My little nook in the internet." />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:title" content="Rafael Negron" />
-    <meta property="og:type" content="blog" />
+    <meta name="viewport" content="width=device-width" />
     <meta property="og:description" content="My little nook in the internet." />
     <meta property="og:image" content="https://rafaelnegron.me/logo.svg" />
-    <meta property="og:url" content="https://rafaelnegron.me/" />
+    <meta property="og:title" content="Rafael Negron" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.rafaelnegron.me/" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:description"
+      content="My little nook in the internet."
+    />
+    <meta property="twitter:domain" content="rafaelnegron.me" />
+    <meta name="twitter:image" content="https://rafaelnegron.me/logo.svg" />
+    <meta name="twitter:title" content="Rafael Negron" />
+    <meta property="twitter:url" content="https://www.rafaelnegron.me/" />
     <title>Rafael Negron</title>
   </head>
   <body
@@ -33,14 +43,16 @@ const currentPath = Astro.url.pathname;
         src="https://rafaelnegron.me/logo.svg"
         width="300"
       />
-      <nav class="w-full border-b border-gray-200 bg-white">
+      <nav class="w-full border-b border-gray-100 bg-gray-50">
         <ul
-          class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 sm:gap-8 px-4 py-4 text-lg"
+          class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-6 sm:gap-10 px-4 py-5 text-sm font-medium tracking-wide uppercase text-gray-700"
         >
           <li>
             <a
               href="/"
-              class={`transition-colors hover:text-blue-600 ${currentPath === "/" ? "font-semibold text-blue-700 underline" : "text-gray-700"}`}
+              class={`border-b-2 border-transparent pb-1 transition-all hover:border-blue-500 hover:text-blue-600 ${
+                currentPath === "/" ? "text-blue-700 border-blue-700" : ""
+              }`}
             >
               Home
             </a>
@@ -48,17 +60,38 @@ const currentPath = Astro.url.pathname;
           <li>
             <a
               href="/guide"
-              class={`transition-colors hover:text-blue-600 ${currentPath.includes("guide") ? "font-semibold text-blue-700 underline" : "text-gray-700"}`}
+              class={`border-b-2 border-transparent pb-1 transition-all hover:border-blue-500 hover:text-blue-600 ${
+                currentPath.includes("guide")
+                  ? "text-blue-700 border-blue-700"
+                  : ""
+              }`}
             >
-              Declassified Career Survival Guide
+              Career Survival Guide
             </a>
           </li>
         </ul>
       </nav>
     </header>
     <slot />
-    <footer class="mt-8">
+    <footer class="mt-8 flex gap-4 items-center">
       <p>&copy; 2025 Rafael Negron</p>
+      <div class="flex gap-2">
+        <a
+          href="https://www.youtube.com/@negronarafael"
+          rel="noopener noreferrer"
+          target="_blank"><Youtube /></a
+        >
+        <a
+          href="https://github.com/User5842"
+          rel="noopener noreferrer"
+          target="_blank"><Github /></a
+        >
+        <a
+          href="mailto:negron.a.rafael@gmail.com"
+          rel="noopener noreferrer"
+          target="_blank"><Mail /></a
+        >
+      </div>
     </footer>
     <Analytics />
   </body>
