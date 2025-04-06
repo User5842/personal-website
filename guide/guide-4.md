@@ -38,4 +38,4 @@ If you're just starting out, or if you're a few years into your career and still
 
 ---
 
-<iframe width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/BBMIJWUBo2s?si=giJEZse433Yx_0JD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe title="A video I made about mistakes I made earlier in my career" width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/BBMIJWUBo2s?si=giJEZse433Yx_0JD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

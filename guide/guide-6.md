@@ -46,4 +46,4 @@ These simple hacks can drastically improve your health without taking a huge amo
 
 ---
 
-<iframe width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/c3LUMT2Rxqk?si=7m_cZz9rIOYAucqU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe title="A video I made about staying healthy in the workplace" width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/c3LUMT2Rxqk?si=7m_cZz9rIOYAucqU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

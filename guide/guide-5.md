@@ -28,4 +28,4 @@ Likability isn’t something you’re born with — it’s a skill you can devel
 
 ---
 
-<iframe width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/vUnAlttQFqg?si=jKSrtumuXw7dLe_L" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe title="A video I made on how to be likable" width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/vUnAlttQFqg?si=jKSrtumuXw7dLe_L" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

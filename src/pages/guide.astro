@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 const guide = (await getCollection("guide")).sort(
   (guideOne, guideTwo) =>
-    guideOne.data.pubDate.getTime() - guideTwo.data.pubDate.getTime(),
+    guideOne.data.pubDate.getTime() - guideTwo.data.pubDate.getTime()
 );
 
 import Layout from "../layouts/Layout.astro";
@@ -16,12 +16,14 @@ import Layout from "../layouts/Layout.astro";
         I have tried creating content on YouTube for many years. I made videos
         about programming content and live-streamed myself, attempting to review
         every problem on <a
-          class="underline text-blue-500"
+          aria-label="The Leetcode study website"
+          class="underline text-blue-700"
           href="https://www.youtube.com/@rafaelnegron_web/videos"
           rel="noopener noreferrer"
           target="_blank">Leetcode</a
         >. I also recorded videos of myself <a
-          class="underline text-blue-500"
+          aria-label="An old YouTube channel by me"
+          class="underline text-blue-700"
           href="https://www.youtube.com/@rafael.negron"
           rel="noopener noreferrer"
           target="_blank">walking and talking</a
@@ -118,7 +120,7 @@ import Layout from "../layouts/Layout.astro";
 <script>
   const input = document.getElementById("search-filter") as HTMLInputElement;
   const guides = document.querySelectorAll(
-    "#guide-list > div",
+    "#guide-list > div"
   ) as NodeListOf<HTMLDivElement>;
 
   input.addEventListener("input", () => {

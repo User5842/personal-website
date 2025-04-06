@@ -60,4 +60,4 @@ Work-life balance isn’t just about working less; it’s about being more inten
 
 ---
 
-<iframe width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/tkV48kh50O4?si=Q6AV9cEGp-y1jOZX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe title="A video I made about setting boundaries for a better work-life balance" width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/tkV48kh50O4?si=Q6AV9cEGp-y1jOZX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

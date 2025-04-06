@@ -100,4 +100,4 @@ You’ve got this. Keep moving forward, one goal at a time.
 
 ---
 
-<iframe width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/41rjxzQl1VE?si=1w4nWq0RDKhjwCbe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe title="A video I made about overcoming anxiety at work" width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/41rjxzQl1VE?si=1w4nWq0RDKhjwCbe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

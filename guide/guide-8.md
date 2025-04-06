@@ -64,4 +64,4 @@ Now go take that vacation—you’ve earned it.
 
 ---
 
-<iframe width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/1EDqBgPnvXQ?si=9-luDatJgRPqBCJO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe title="A video I made about taking PTO" width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/1EDqBgPnvXQ?si=9-luDatJgRPqBCJO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>

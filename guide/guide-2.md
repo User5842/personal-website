@@ -44,4 +44,4 @@ Advancing in your career can feel unclear, especially when companies don't publi
 
 ---
 
-<iframe width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/YEjGwlm_rzs?si=nY5QFr5u8MKcYUez" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe title="A video I made about a 4-step promotion framework" width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/YEjGwlm_rzs?si=nY5QFr5u8MKcYUez" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
