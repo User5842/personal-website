@@ -4,74 +4,46 @@ pubDate: "2025-03-13"
 title: "Want To Get Ahead? My SVP Shared These Tips"
 ---
 
-Ever since starting in my current company, I have known a specific colleague who is a manager and whom I should try to befriend.
+When I found out our engineering team was moving into a new building—and that I’d be sitting just a few feet from our Senior Vice President—I decided to take a shot. I sent him a Slack message, asked for a 1:1, and to my surprise… he said yes.
 
-Eventually, he became the Senior Vice President of the engineering organization that I work in, and I knew that I should reach out and talk to him. It never hurts to put yourself out there, and now that our team had reshuffled into a new building, I was only a few feet away from him.
+![Slack message](../src/assets/slack-jitendra.png)
 
-So, I shoot my shot.
+A few days later, we sat down for a candid conversation about career growth, leadership, and how to make the most of your time in a big tech company. Here’s what I learned:
 
-![image info](../src/assets/slack-jitendra.png)
+---
 
-To my excitement, he accepted, and a couple of days later, we had our first formal meeting.
+## There is always a leadership vacuum.
 
-Now, I'm not one to prepare because I'd rather have organic meetings that aren't scripted. Taking notes ahead of time messes with my flow, and I feel like I am better on the spot.
+You don’t need a title to lead. Great leadership is rare, and often the best way to grow is to fill the gaps no one else wants to. Be the person others can rely on.
 
-I enter the room and start asking for advice. I tell him where I am currently in my career, what I am working on, and if what I will be working on is a good path forward.
+## Raise your hand, help others, and over-deliver
 
-I asked him what he thought about the company and what I should consider if I wanted to stay as an individual contributor or pursue the management path.
+Take on the tough stuff. Volunteer for the unknown. Mentor your teammates. The more value you give, the more opportunities will come back your way.
 
-He gives me the following bits of advice:
+## Opportunities come out of nowhere at any time.
 
-## 1. There is always a leadership vacuum.
+Plans are helpful, but preparation is better. Stay sharp in your current role, and when an unexpected door opens, you’ll be the first one they think of.
 
-You don't need to have a specific title to be able to act or execute. Great leadership is needed everywhere you look, regardless of the company or team you're on. Become the leader in whatever you thrive in, or, better yet, find what others don't like doing and become a leader in that area.
+## Don't think company, think team.
 
-Just yesterday, a colleague of mine shared with me how he, his wife, and others are struggling to find great leaders to help them grow their careers. There is a lack of great role models, so become the person and start a trend.
+Sometimes, it’s not the company that’s the issue—it’s the team. Look around internally before assuming you need to jump ship.
 
-You don't need to be labeled "lead," "manager," etc., to be a great role model for your team.
+## Working faster is oftentimes better than planning too much.
 
-## 2.Raise your hand, help others, and over-deliver
+Perfectionism kills progress. Build quickly, iterate often, and don’t get stuck in planning purgatory.
 
-The easiest way to level up in your career is to go into the unknown. Don't know something? Good. Please raise your hand and ask to be the one to do it. Better yet, do it anyway without asking.
+> "Fail fast, fail forward, fail often."
 
-Help and mentor others on your team when you have an opportunity to do so. Leaders are easy to spot, and being a great leader means being a great mentor to others. Help others around you level up, and you will also level up. For any assignment you are given, big or small, over-deliver and go the extra mile to make something special.
+## Learn the business.
 
-## 3. Opportunities come out of nowhere at any time.
+The best engineers understand the “why” behind the code. Ask questions. Understand the customer. You’ll build better—and be more valuable.
 
-Planning for your future is great, but always being prepared is better. Don't pigeonhole yourself and aim for a specific role; rather, do the best you can at your current position, and opportunities will typically present themselves.
+This conversation gave me a ton of clarity. My next step? Talking with the co-president of our organization.
 
-The team members who feel the pressure, do well, help others, and raise their hands are often given first dibs on opportunities. You will naturally progress in your career if you track and measure your progress in your specific role at every step of the way.
+---
 
-## 4. Don't think company, think team.
-
-Engineers choose to leave a company because another company pays more or sounds cool. Just because a company has some unique or interesting benefits does not mean the teams at those companies will satisfy or challenge you.
-
-Feeling burnt out or bored on your current team? Look for a new team. Ask your manager about other opportunities within the business and see how you can expand your scope and impact across the organization.
-
-Oftentimes, the opportunities are there; you need to search for them intentionally.
-
-## 5. Working faster is oftentimes better than planning too much.
-
-Engineering is not linear, so planning too much can detriment your work. It's much better to POC and iterate quickly to get things done quickly at the quality you expect.
-
-Engineers often spend too much time planning and never finish a project or make any real progress.
-
-> "Fail often, fail fast."
-
-## 6. Learn the business.
-
-Use your PMs to learn more about the "why" of a feature you're working on. Engineers love to code but often find themselves in the coding tunnel, unable to see the broader picture.
-
-Learn the business and ask your PMs questions to learn more about customer wants and expectations.
-
-Use this as leverage to find opportunities to have the most significant impact.
-
-I learned so much from this conversation, and now, with a new batch of knowledge, I am excited to apply what I learned.
-
-**Next step?** Talk with the co-president of the organization.
-
-Here is an embed of the original Reddit post and a link to a YouTube video related to the same topic.
+Here is an embed of the original Reddit post and YouTube video related to the same topic.
 
 <blockquote class="reddit-embed-bq" style="height:316px" data-embed-locale="en-EN" data-embed-height="316"><a href="https://www.reddit.com/r/cscareerquestions/comments/1jad1e2/i_recently_spoke_to_my_svp_of_engineering_heres/">I recently spoke to my SVP of engineering; here’s what I learned</a><br> by<a href="https://www.reddit.com/user/entrasonics/">u/entrasonics</a> in<a href="https://www.reddit.com/r/cscareerquestions/">cscareerquestions</a></blockquote><script async="" src="https://embed.reddit.com/widgets.js" charset="UTF-8"></script>
 
-[![Watch the video](https://img.youtube.com/vi/jtSYf1hYjFE/0.jpg)](https://youtu.be/jtSYf1hYjFE)
+<iframe width="560" height="315" class="mt-5 w-full" src="https://www.youtube.com/embed/jtSYf1hYjFE?si=uzCWw3wXzzoIdHwm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
