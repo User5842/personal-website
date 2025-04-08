@@ -1,0 +1,41 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Clock } from "@lucide/astro";
+import Prose from "../../components/Prose.astro";
+
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  const guideEntries = await getCollection("guide");
+
+  const blogPaths = blogEntries.map((entry) => ({
+    params: { route: "blog", id: entry.id },
+    props: { entry },
+  }));
+
+  const guidePaths = guideEntries.map((entry) => ({
+    params: { route: "guide", id: entry.id },
+    props: { entry },
+  }));
+
+  return [...blogPaths, ...guidePaths];
+}
+
+const { entry } = Astro.props;
+
+const { Content, remarkPluginFrontmatter } = await render(entry);
+---
+
+<Layout>
+  <Prose>
+    <article class="mt-8">
+      <h1 class="text-center">{entry.data.title}</h1>
+      <div class="flex gap-2 items-center">
+        <Clock />
+        <p>{remarkPluginFrontmatter.minutesRead}</p>
+      </div>
+      <Content />
+    </article>
+  </Prose>
+</Layout>
