@@ -1,11 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+
+import Layout from "../layouts/Layout.astro";
+
 const blog = (await getCollection("blog")).sort(
   (postOne, postTwo) =>
     postTwo.data.pubDate.getTime() - postOne.data.pubDate.getTime(),
 );
-
-import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>

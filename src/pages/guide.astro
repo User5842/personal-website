@@ -1,11 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+
+import Layout from "../layouts/Layout.astro";
+
 const guide = (await getCollection("guide")).sort(
   (guideOne, guideTwo) =>
     guideTwo.data.pubDate.getTime() - guideOne.data.pubDate.getTime(),
 );
-
-import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>

@@ -1,9 +1,10 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import { Clock } from "@lucide/astro";
-import Prose from "../../components/Prose.astro";
-
 import { getCollection, render } from "astro:content";
+
+import { Clock } from "@lucide/astro";
+
+import Prose from "../../components/Prose.astro";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
