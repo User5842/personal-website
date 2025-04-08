@@ -75,6 +75,18 @@ const currentPath = Astro.url.pathname;
               Career Survival Guide
             </a>
           </li>
+          <li>
+            <a
+              href="/blog"
+              class={`border-b-2 border-transparent pb-1 transition-all hover:border-blue-500 hover:text-blue-600 ${
+                currentPath.includes("blog")
+                  ? "text-blue-700 border-blue-700"
+                  : ""
+              }`}
+            >
+              Blog
+            </a>
+          </li>
         </ul>
       </nav>
     </header>

@@ -1,0 +1,30 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Clock } from "@lucide/astro";
+import Prose from "../../components/Prose.astro";
+
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const blog = await getCollection("blog");
+  return blog.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+const { post } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(post);
+---
+
+<Layout>
+  <Prose>
+    <article class="mt-8">
+      <h1 class="text-center">{post.data.title}</h1>
+      <div class="flex gap-2 items-center">
+        <Clock />
+        <p>{remarkPluginFrontmatter.minutesRead}</p>
+      </div>
+      <Content />
+    </article>
+  </Prose>
+</Layout>
