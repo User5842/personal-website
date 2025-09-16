@@ -21,7 +21,7 @@
     "npm-check-updates": "18.0.1",
     "reading-time": "1.5.0",
     "rehype-external-links": "3.0.0",
-    "sanitize-html": "2.16.0",
+    "sanitize-html": "2.17.0",
     "tailwindcss": "4.1.5"
   },
   "devDependencies": {
