@@ -11,22 +11,14 @@
     "upgrade": "ncu -u"
   },
   "dependencies": {
-    "@astrojs/rss": "4.0.11",
-    "@lucide/astro": "0.503.0",
-    "@tailwindcss/vite": "4.1.5",
+    "@tailwindcss/vite": "4.1.16",
     "@vercel/analytics": "1.5.0",
-    "astro": "5.7.10",
-    "markdown-it": "14.1.0",
-    "mdast-util-to-string": "4.0.0",
-    "npm-check-updates": "18.0.1",
-    "reading-time": "1.5.0",
-    "rehype-external-links": "3.0.0",
-    "sanitize-html": "2.16.0",
-    "tailwindcss": "4.1.5"
+    "astro": "^5.15.3",
+    "npm-check-updates": "19.1.2",
+    "tailwindcss": "4.1.16"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "0.5.16",
-    "prettier": "3.5.3",
+    "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1"
   }
 }
