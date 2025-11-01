@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import CompoundInterestForm from "../../components/CompoundInterestForm.tsx";
 
 import "../../styles/global.css";
 ---
@@ -22,6 +22,13 @@ import "../../styles/global.css";
       <p class="mt-2 text-gray-600 max-w-md text-base sm:text-lg md:text-xl">
         A simple implementation of a compound interest calculator.
       </p>
+      <section class="mt-6 w-full">
+        <div
+          class="mx-auto w-full max-w-[clamp(24rem,92vw,46rem)] sm:max-w-xl md:max-w-2xl"
+        >
+          <CompoundInterestForm client:load />
+        </div>
+      </section>
     </main>
   </body>
 </html>
