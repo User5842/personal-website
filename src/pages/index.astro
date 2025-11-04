@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
-import { Youtube, Twitter } from "@lucide/astro";
+import { Youtube, Twitter, Calculator } from "@lucide/astro";
 
 import "../styles/global.css";
 
@@ -31,23 +31,27 @@ import profileImage from "../assets/me.png";
       <p class="mt-2 text-gray-600 max-w-md text-base sm:text-lg md:text-xl">
         My little nook of the internet.
       </p>
-      <section class="mt-6">
+      <section class="mt-10 w-full max-w-3xl">
         <h2 class="font-bold text-xl sm:text-2xl text-gray-900">Projects</h2>
         <p class="mt-2 text-gray-600 text-sm sm:text-base max-w-md mx-auto">
           A few of the tools, apps, and experiments I’m building or exploring in
           my spare time.
         </p>
 
-        <nav
-          class="mt-6 flex flex-wrap justify-center gap-4 text-sm sm:text-base font-medium text-gray-700"
+        <div
+          class="mt-6 grid justify-center gap-4 mx-auto w-full"
+          style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); max-width: 720px;"
         >
           <a
-            href="/compound"
-            class="hover:text-gray-900 transition-colors duration-200"
+            href="/four-percent"
+            class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200 p-4 text-gray-700 hover:text-gray-900"
           >
-            Simple Compound Interest Calculator
+            <Calculator class="w-5 h-5 text-blue-600" />
+            <span class="font-medium text-sm sm:text-base text-left">
+              4% Retirement Calculators
+            </span>
           </a>
-        </nav>
+        </div>
       </section>
       <hr class="mt-10 mb-8 w-16 border-t-2 border-gray-200" />
       <div class="mt-6 flex gap-6">
