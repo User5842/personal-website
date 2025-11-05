@@ -1,7 +1,11 @@
+import * as React from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
+import { Info } from "lucide-react";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -9,8 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Field,
   FieldContent,
@@ -18,8 +20,7 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
-
-import { Info } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { asNumber, currency } from "@/lib/utils";
 
 const AnnualWithdrawalSchema = z.object({
@@ -46,8 +47,22 @@ export default function AnnualWithdrawal() {
   });
 
   const values = watch();
-  const withdrawal =
-    (values.portfolioValue ?? 0) * ((values.withdrawalRatePct ?? 4) / 100);
+
+  // Validate inputs before calculating
+  const portfolioValue = values.portfolioValue ?? 0;
+  const withdrawalRate = values.withdrawalRatePct ?? 4;
+
+  const withdrawal = React.useMemo(() => {
+    if (
+      !Number.isFinite(portfolioValue) ||
+      !Number.isFinite(withdrawalRate) ||
+      portfolioValue < 0 ||
+      withdrawalRate <= 0
+    ) {
+      return 0;
+    }
+    return portfolioValue * (withdrawalRate / 100);
+  }, [portfolioValue, withdrawalRate]);
 
   return (
     <Card className="w-full max-w-2xl border-gray-200">
@@ -66,10 +81,10 @@ export default function AnnualWithdrawal() {
               <FieldLabel htmlFor="portfolioValue">Portfolio Value</FieldLabel>
               <FieldContent>
                 <Input
+                  aria-invalid={!!errors.portfolioValue}
                   id="portfolioValue"
                   inputMode="decimal"
-                  placeholder="1000000"
-                  aria-invalid={!!errors.portfolioValue}
+                  placeholder="1,000,000"
                   {...register("portfolioValue", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -88,10 +103,10 @@ export default function AnnualWithdrawal() {
               </FieldLabel>
               <FieldContent>
                 <Input
+                  aria-invalid={!!errors.withdrawalRatePct}
                   id="withdrawalRatePct"
                   inputMode="decimal"
                   placeholder="4"
-                  aria-invalid={!!errors.withdrawalRatePct}
                   {...register("withdrawalRatePct", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -108,9 +123,9 @@ export default function AnnualWithdrawal() {
           </FieldGroup>
 
           <Alert
-            role="status"
             aria-live="polite"
             className="bg-blue-50 text-blue-950 border-blue-200 text-left"
+            role="status"
           >
             <Info className="h-4 w-4" />
             <AlertTitle className="font-semibold text-left">Result</AlertTitle>
@@ -119,8 +134,7 @@ export default function AnnualWithdrawal() {
                 First-year withdrawal: {currency(Math.max(0, withdrawal))}
               </div>
               <div className="text-sm text-gray-600">
-                Formula: {currency(values.portfolioValue ?? 0)} ×{" "}
-                {(values.withdrawalRatePct ?? 4) / 100}.
+                Formula: {currency(portfolioValue)} × {withdrawalRate / 100}.
               </div>
             </AlertDescription>
           </Alert>

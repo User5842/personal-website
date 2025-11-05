@@ -1,8 +1,11 @@
 import * as React from "react";
-import { useForm, type Resolver, Controller } from "react-hook-form";
+import { Controller, type Resolver, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { Info } from "lucide-react";
+
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -10,9 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Field,
   FieldContent,
@@ -22,38 +22,43 @@ import {
   FieldLegend,
   FieldSet,
 } from "@/components/ui/field";
-
-import { Info } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { asNumber, currency } from "@/lib/utils";
 
 const dollarsModes = ["today", "target"] as const;
 
-const TargetPortfolioSchema = z.object({
-  desiredAnnualIncome: z
-    .number({ invalid_type_error: "Enter a dollar amount" })
-    .min(0, "Must be ≥ 0"),
-  dollarsMode: z.enum(dollarsModes).default("today"),
-  withdrawalRatePct: z
-    .number({ invalid_type_error: "Enter a percentage" })
-    .min(0.1, "Too low")
-    .max(100, "Too high")
-    .default(4),
-  retirementYear: z
-    .number({ invalid_type_error: "Enter a year" })
-    .int()
-    .min(1900)
-    .max(2120),
-  targetYear: z
-    .number({ invalid_type_error: "Enter a year" })
-    .int()
-    .min(1900)
-    .max(2120),
-  inflationPct: z
-    .number({ invalid_type_error: "Enter inflation %" })
-    .min(0)
-    .max(50)
-    .default(3),
-});
+const TargetPortfolioSchema = z
+  .object({
+    desiredAnnualIncome: z
+      .number({ invalid_type_error: "Enter a dollar amount" })
+      .min(0, "Must be ≥ 0"),
+    dollarsMode: z.enum(dollarsModes).default("today"),
+    withdrawalRatePct: z
+      .number({ invalid_type_error: "Enter a percentage" })
+      .min(0.1, "Must be at least 0.1%")
+      .max(100, "Must be at most 100%")
+      .default(4),
+    retirementYear: z
+      .number({ invalid_type_error: "Enter a year" })
+      .int("Must be a whole number")
+      .min(1900, "Must be 1900 or later")
+      .max(2120, "Must be 2120 or earlier"),
+    targetYear: z
+      .number({ invalid_type_error: "Enter a year" })
+      .int("Must be a whole number")
+      .min(1900, "Must be 1900 or later")
+      .max(2120, "Must be 2120 or earlier"),
+    inflationPct: z
+      .number({ invalid_type_error: "Enter inflation %" })
+      .min(0, "Must be ≥ 0%")
+      .max(50, "Must be ≤ 50%")
+      .default(3),
+  })
+  .refine((data) => data.targetYear >= data.retirementYear, {
+    message: "Target year must be on or after retirement year",
+    path: ["targetYear"],
+  });
 
 type TargetPortfolioValues = z.infer<typeof TargetPortfolioSchema>;
 
@@ -81,13 +86,36 @@ export default function TargetPortfolio() {
   const v = watch();
 
   const result = React.useMemo(() => {
-    const w = (v.withdrawalRatePct ?? 4) / 100; // e.g., 0.04
-    const i = (v.inflationPct ?? 0) / 100; // e.g., 0.03
-    const years = (v.targetYear ?? 0) - (v.retirementYear ?? 0);
+    // Validate inputs exist and are valid numbers
+    const withdrawalRate = v.withdrawalRatePct ?? 4;
+    const inflationRate = v.inflationPct ?? 0;
+    const retirementYear = v.retirementYear ?? 0;
+    const targetYear = v.targetYear ?? 0;
+    const desired = v.desiredAnnualIncome ?? 0;
+
+    // Early return for invalid inputs
+    if (
+      !Number.isFinite(withdrawalRate) ||
+      !Number.isFinite(inflationRate) ||
+      !Number.isFinite(retirementYear) ||
+      !Number.isFinite(targetYear) ||
+      !Number.isFinite(desired) ||
+      withdrawalRate <= 0 ||
+      targetYear < retirementYear
+    ) {
+      return {
+        Pneeded: 0,
+        year1Withdrawal: 0,
+        desiredInTargetYear: desired,
+        explainer: "Please enter valid values to calculate.",
+      };
+    }
+
+    const w = withdrawalRate / 100; // e.g., 0.04
+    const i = inflationRate / 100; // e.g., 0.03
+    const years = targetYear - retirementYear;
     const inflFactor = Math.pow(1 + i, years);
     const isSameYear = years === 0;
-
-    const desired = v.desiredAnnualIncome ?? 0;
 
     // Calculate desired income in target year dollars
     const desiredInTargetYear =
@@ -97,8 +125,30 @@ export default function TargetPortfolio() {
     // Year N withdrawal = Portfolio * withdrawalRate * (1 + inflation)^(N - retirementYear)
     // So: desiredInTargetYear = Pneeded * w * inflFactor
     // Therefore: Pneeded = desiredInTargetYear / (w * inflFactor)
-    const Pneeded = desiredInTargetYear / (w * inflFactor);
+    // Guard against division by zero
+    const denominator = w * inflFactor;
+    if (denominator === 0 || !Number.isFinite(denominator)) {
+      return {
+        Pneeded: 0,
+        year1Withdrawal: 0,
+        desiredInTargetYear: desired,
+        explainer: "Cannot calculate: withdrawal rate must be greater than 0.",
+      };
+    }
+
+    const Pneeded = desiredInTargetYear / denominator;
     const year1Withdrawal = Pneeded * w;
+
+    // Validate results are finite
+    if (!Number.isFinite(Pneeded) || !Number.isFinite(year1Withdrawal)) {
+      return {
+        Pneeded: 0,
+        year1Withdrawal: 0,
+        desiredInTargetYear: desired,
+        explainer:
+          "Calculation resulted in invalid values. Please check your inputs.",
+      };
+    }
 
     // Build explainer text based on mode and whether years are the same
     let explainer: string;
@@ -137,23 +187,23 @@ export default function TargetPortfolio() {
           <FieldSet>
             <FieldLegend>Desired Income Input</FieldLegend>
             <Controller
-              name="dollarsMode"
               control={control}
+              name="dollarsMode"
               render={({ field }) => (
                 <RadioGroup
                   className="grid grid-cols-2 gap-2"
-                  value={field.value}
                   onValueChange={field.onChange}
+                  value={field.value}
                 >
                   <div className="flex items-center gap-2 rounded-md border p-2">
                     <RadioGroupItem id="today" value="today" />
-                    <label htmlFor="today" className="cursor-pointer">
+                    <label className="cursor-pointer" htmlFor="today">
                       In today's dollars
                     </label>
                   </div>
                   <div className="flex items-center gap-2 rounded-md border p-2">
                     <RadioGroupItem id="target" value="target" />
-                    <label htmlFor="target" className="cursor-pointer">
+                    <label className="cursor-pointer" htmlFor="target">
                       In target-year dollars
                     </label>
                   </div>
@@ -169,10 +219,10 @@ export default function TargetPortfolio() {
               </FieldLabel>
               <FieldContent>
                 <Input
+                  aria-invalid={!!errors.desiredAnnualIncome}
                   id="desiredAnnualIncome"
                   inputMode="decimal"
-                  placeholder="80000"
-                  aria-invalid={!!errors.desiredAnnualIncome}
+                  placeholder="80,000"
                   {...register("desiredAnnualIncome", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -193,10 +243,10 @@ export default function TargetPortfolio() {
               </FieldLabel>
               <FieldContent>
                 <Input
+                  aria-invalid={!!errors.withdrawalRatePct}
                   id="withdrawalRatePct"
                   inputMode="decimal"
                   placeholder="4"
-                  aria-invalid={!!errors.withdrawalRatePct}
                   {...register("withdrawalRatePct", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -215,10 +265,10 @@ export default function TargetPortfolio() {
               <FieldLabel htmlFor="retirementYear">Retirement Year</FieldLabel>
               <FieldContent>
                 <Input
+                  aria-invalid={!!errors.retirementYear}
                   id="retirementYear"
                   inputMode="numeric"
                   placeholder="2040"
-                  aria-invalid={!!errors.retirementYear}
                   {...register("retirementYear", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -235,10 +285,10 @@ export default function TargetPortfolio() {
               <FieldLabel htmlFor="targetYear">Target Year</FieldLabel>
               <FieldContent>
                 <Input
+                  aria-invalid={!!errors.targetYear}
                   id="targetYear"
                   inputMode="numeric"
                   placeholder="2050"
-                  aria-invalid={!!errors.targetYear}
                   {...register("targetYear", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -253,10 +303,10 @@ export default function TargetPortfolio() {
               <FieldLabel htmlFor="inflationPct">Inflation (%/yr)</FieldLabel>
               <FieldContent>
                 <Input
+                  aria-invalid={!!errors.inflationPct}
                   id="inflationPct"
                   inputMode="decimal"
                   placeholder="3"
-                  aria-invalid={!!errors.inflationPct}
                   {...register("inflationPct", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -271,9 +321,9 @@ export default function TargetPortfolio() {
           </FieldGroup>
 
           <Alert
-            role="status"
             aria-live="polite"
             className="bg-blue-50 text-blue-950 border-blue-200 text-left"
+            role="status"
           >
             <Info className="h-4 w-4" />
             <AlertTitle className="font-semibold text-left">Result</AlertTitle>

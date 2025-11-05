@@ -1,17 +1,15 @@
 ---
 import { Image } from "astro:assets";
-
-import { Youtube, Twitter, Calculator } from "@lucide/astro";
-
-import "../styles/global.css";
+import { Calculator, Twitter, Youtube } from "@lucide/astro";
 
 import profileImage from "../assets/me.png";
+import "../styles/global.css";
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Rafael Negron</title>
   </head>
   <body class="bg-gray-50 text-gray-800">
@@ -19,9 +17,9 @@ import profileImage from "../assets/me.png";
       class="container mx-auto px-4 py-16 flex flex-col items-center text-center"
     >
       <Image
-        src={profileImage}
         alt="Casual portrait of Rafael Negron smiling at the camera."
         class="rounded-full object-cover shadow-lg w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 transition-transform duration-300 hover:scale-105"
+        src={profileImage}
       />
       <h1
         class="mt-6 font-extrabold tracking-tight text-gray-900 text-3xl sm:text-4xl md:text-5xl"
@@ -34,7 +32,7 @@ import profileImage from "../assets/me.png";
       <section class="mt-10 w-full max-w-3xl">
         <h2 class="font-bold text-xl sm:text-2xl text-gray-900">Projects</h2>
         <p class="mt-2 text-gray-600 text-sm sm:text-base max-w-md mx-auto">
-          A few of the tools, apps, and experiments I’m building or exploring in
+          A few of the tools, apps, and experiments I'm building or exploring in
           my spare time.
         </p>
 
@@ -43,8 +41,8 @@ import profileImage from "../assets/me.png";
           style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); max-width: 720px;"
         >
           <a
-            href="/four-percent"
             class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200 p-4 text-gray-700 hover:text-gray-900"
+            href="/four-percent"
           >
             <Calculator class="w-5 h-5 text-blue-600" />
             <span class="font-medium text-sm sm:text-base text-left">
