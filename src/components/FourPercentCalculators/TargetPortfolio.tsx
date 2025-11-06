@@ -25,6 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { asNumber, currency } from "@/lib/utils";
+import { computeTargetPortfolio } from "@/lib/retirement";
 
 const dollarsModes = ["today", "target"] as const;
 
@@ -111,83 +112,48 @@ export default function TargetPortfolio() {
       };
     }
 
-    const w = withdrawalRate / 100; // e.g., 0.04
-    const i = inflationRate / 100; // e.g., 0.03
+    // Use the pure math function
+    const computed = computeTargetPortfolio({
+      mode: v.dollarsMode,
+      desiredIncome: desired,
+      withdrawalRatePct: withdrawalRate,
+      inflationPct: inflationRate,
+      todayYear: now,
+      retirementYear: retirementYear,
+      targetYear: targetYear,
+    });
+
+    const { portfolioNeeded, year1Withdrawal, targetYearIncome } = computed;
+
+    // Build explainer text based on mode
+    let explainer: string;
     const yearsFromRetirementToTarget = targetYear - retirementYear;
-    const inflFactorRetirementToTarget = Math.pow(
-      1 + i,
-      yearsFromRetirementToTarget,
-    );
+    const yearsFromTodayToTarget = targetYear - now;
+    const yearsFromTodayToRetirement = retirementYear - now;
     const isSameYear = yearsFromRetirementToTarget === 0;
 
-    // Calculate desired income in target year dollars
-    let desiredInTargetYear: number;
-    let yearsFromTodayToTarget: number;
-
     if (v.dollarsMode === "today") {
-      // In "today's dollars" mode, inflate from today to target year
-      yearsFromTodayToTarget = targetYear - now;
-      const inflFactorTodayToTarget = Math.pow(1 + i, yearsFromTodayToTarget);
-      desiredInTargetYear = desired * inflFactorTodayToTarget;
-    } else {
-      // In "target-year dollars" mode, use the value directly
-      desiredInTargetYear = desired;
-      yearsFromTodayToTarget = 0; // Not used in this mode
-    }
-
-    // To get desired income in target year, we need:
-    // Year N withdrawal = Portfolio * withdrawalRate * (1 + inflation)^(N - retirementYear)
-    // So: desiredInTargetYear = Pneeded * w * inflFactorRetirementToTarget
-    // Therefore: Pneeded = desiredInTargetYear / (w * inflFactorRetirementToTarget)
-    // Guard against division by zero
-    const denominator = w * inflFactorRetirementToTarget;
-    if (denominator === 0 || !Number.isFinite(denominator)) {
-      return {
-        Pneeded: 0,
-        year1Withdrawal: 0,
-        desiredInTargetYear: desired,
-        explainer: "Cannot calculate: withdrawal rate must be greater than 0.",
-      };
-    }
-
-    const Pneeded = desiredInTargetYear / denominator;
-    const year1Withdrawal = Pneeded * w;
-
-    // Validate results are finite
-    if (!Number.isFinite(Pneeded) || !Number.isFinite(year1Withdrawal)) {
-      return {
-        Pneeded: 0,
-        year1Withdrawal: 0,
-        desiredInTargetYear: desired,
-        explainer:
-          "Calculation resulted in invalid values. Please check your inputs.",
-      };
-    }
-
-    // Build explainer text based on mode and whether years are the same
-    let explainer: string;
-    if (isSameYear) {
-      // When retirement year = target year, we're calculating for the first year of retirement
-      if (v.dollarsMode === "today") {
-        explainer = `You entered ${currency(desired)} in today's purchasing power. Since retirement and target year are the same (${v.targetYear}), this means your first-year withdrawal in ${v.targetYear} should have the purchasing power of ${currency(desired)} today (${currency(desiredInTargetYear)} in ${v.targetYear} dollars, adjusted for ${v.inflationPct}% inflation from ${now} to ${v.targetYear}). To support that withdrawal, you'll need ${currency(Pneeded)} at retirement using a ${v.withdrawalRatePct}% withdrawal rate.`;
+      if (isSameYear) {
+        explainer = `You entered ${currency(desired)} in today's purchasing power. Since retirement and target year are the same (${v.targetYear}), this means your first-year withdrawal in ${v.targetYear} should have the purchasing power of ${currency(desired)} today (${currency(targetYearIncome)} in ${v.targetYear} dollars, adjusted for ${v.inflationPct}% inflation from ${now} to ${v.targetYear}). To support that withdrawal, you'll need ${currency(portfolioNeeded)} at retirement using a ${v.withdrawalRatePct}% withdrawal rate.`;
       } else {
-        explainer = `You entered ${currency(desired)} in ${v.targetYear} dollars. Since retirement and target year are the same, this is your first-year withdrawal amount. To support ${currency(desired)} in ${v.targetYear}, you'll need ${currency(Pneeded)} at retirement using a ${v.withdrawalRatePct}% withdrawal rate.`;
+        explainer = `You entered ${currency(desired)} in today's purchasing power. We inflated this from ${now} to ${v.targetYear} (${yearsFromTodayToTarget} years at ${v.inflationPct}% inflation) to get ${currency(targetYearIncome)} in ${v.targetYear} dollars. Then we discounted this back from ${v.targetYear} to ${v.retirementYear} (${yearsFromRetirementToTarget} years) to get the year 1 withdrawal of ${currency(year1Withdrawal)}. To support that withdrawal, you'll need ${currency(portfolioNeeded)} at retirement using a ${v.withdrawalRatePct}% withdrawal rate.`;
       }
     } else {
-      if (v.dollarsMode === "today") {
-        explainer = `You entered ${currency(desired)} in today's purchasing power. In ${v.targetYear}, that equals ${currency(desiredInTargetYear)} in nominal dollars (adjusted for ${v.inflationPct}% inflation over ${yearsFromTodayToTarget} years from ${now} to ${v.targetYear}). To support that withdrawal amount in ${v.targetYear}, you'll need ${currency(Pneeded)} at retirement using a ${v.withdrawalRatePct}% withdrawal rate, which accounts for ${yearsFromRetirementToTarget} years of inflation growth from retirement to target year.`;
+      // target-year dollars mode
+      if (isSameYear) {
+        explainer = `You entered ${currency(desired)} in ${v.targetYear} dollars. Since retirement and target year are the same, this is your first-year withdrawal amount. To support ${currency(desired)} in ${v.targetYear}, you'll need ${currency(portfolioNeeded)} at retirement using a ${v.withdrawalRatePct}% withdrawal rate.`;
       } else {
-        explainer = `You entered ${currency(desired)} in ${v.targetYear} dollars. To support that withdrawal amount in ${v.targetYear} (accounting for ${v.inflationPct}% inflation over ${yearsFromRetirementToTarget} years from retirement to target year), you'll need ${currency(Pneeded)} at retirement using a ${v.withdrawalRatePct}% withdrawal rate.`;
+        explainer = `You entered ${currency(desired)} in ${v.targetYear} dollars. We discounted this back from ${v.targetYear} to ${v.retirementYear} (${yearsFromRetirementToTarget} years at ${v.inflationPct}% inflation) to get the year 1 withdrawal of ${currency(year1Withdrawal)}. To support that withdrawal, you'll need ${currency(portfolioNeeded)} at retirement using a ${v.withdrawalRatePct}% withdrawal rate.`;
       }
     }
 
     return {
-      Pneeded,
-      year1Withdrawal,
-      desiredInTargetYear,
+      Pneeded: portfolioNeeded,
+      year1Withdrawal: year1Withdrawal,
+      desiredInTargetYear: targetYearIncome,
       explainer,
     };
-  }, [v]);
+  }, [v, now]);
 
   return (
     <Card className="w-full max-w-2xl border-gray-200">
