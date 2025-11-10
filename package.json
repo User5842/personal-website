@@ -37,7 +37,7 @@
     "zod": "3.25.76"
   },
   "devDependencies": {
-    "@astrojs/react": "4.4.1",
+    "@astrojs/react": "4.4.2",
     "@vitest/ui": "^4.0.7",
     "prettier": "3.6.2",
     "prettier-plugin-astro": "0.14.1",
