@@ -156,36 +156,52 @@ export default function TargetPortfolio() {
   }, [v, now]);
 
   return (
-    <Card className="w-full max-w-2xl border-gray-200">
-      <CardHeader>
-        <CardTitle className="text-2xl">Target Portfolio</CardTitle>
-        <CardDescription>
-          See how much you’d need saved to retire comfortably based on your
+    <Card className="w-full max-w-2xl mx-auto border-gray-200 shadow-sm">
+      <CardHeader className="px-4 sm:px-6">
+        <CardTitle className="text-xl sm:text-2xl">Target Portfolio</CardTitle>
+        <CardDescription className="text-sm sm:text-base">
+          See how much you'd need saved to retire comfortably based on your
           desired yearly income.
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <form className="grid gap-6">
+      <CardContent className="px-4 sm:px-6">
+        <form className="grid gap-4 sm:gap-6">
           <FieldSet>
-            <FieldLegend>Desired Income Input</FieldLegend>
+            <FieldLegend className="text-sm sm:text-base">
+              Desired Income Input
+            </FieldLegend>
             <Controller
               control={control}
               name="dollarsMode"
               render={({ field }) => (
                 <RadioGroup
-                  className="grid grid-cols-2 gap-2"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3"
                   onValueChange={field.onChange}
                   value={field.value}
                 >
-                  <div className="flex items-center gap-2 rounded-md border p-2">
-                    <RadioGroupItem id="today" value="today" />
-                    <label className="cursor-pointer" htmlFor="today">
+                  <div className="flex items-center gap-2 sm:gap-3 rounded-md border p-3 sm:p-2.5 hover:bg-accent/50 transition-colors">
+                    <RadioGroupItem
+                      id="today"
+                      value="today"
+                      className="shrink-0"
+                    />
+                    <label
+                      className="cursor-pointer text-sm sm:text-base flex-1"
+                      htmlFor="today"
+                    >
                       In today's dollars
                     </label>
                   </div>
-                  <div className="flex items-center gap-2 rounded-md border p-2">
-                    <RadioGroupItem id="target" value="target" />
-                    <label className="cursor-pointer" htmlFor="target">
+                  <div className="flex items-center gap-2 sm:gap-3 rounded-md border p-3 sm:p-2.5 hover:bg-accent/50 transition-colors">
+                    <RadioGroupItem
+                      id="target"
+                      value="target"
+                      className="shrink-0"
+                    />
+                    <label
+                      className="cursor-pointer text-sm sm:text-base flex-1"
+                      htmlFor="target"
+                    >
                       In target-year dollars
                     </label>
                   </div>
@@ -194,9 +210,12 @@ export default function TargetPortfolio() {
             />
           </FieldSet>
 
-          <FieldGroup>
+          <FieldGroup className="gap-4 sm:gap-5">
             <Field>
-              <FieldLabel htmlFor="desiredAnnualIncome">
+              <FieldLabel
+                htmlFor="desiredAnnualIncome"
+                className="text-sm sm:text-base"
+              >
                 Desired Annual Income
               </FieldLabel>
               <FieldContent>
@@ -205,6 +224,7 @@ export default function TargetPortfolio() {
                   id="desiredAnnualIncome"
                   inputMode="decimal"
                   placeholder="80,000"
+                  className="text-base sm:text-base h-10 sm:h-9"
                   {...register("desiredAnnualIncome", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -220,7 +240,10 @@ export default function TargetPortfolio() {
             </Field>
 
             <Field>
-              <FieldLabel htmlFor="withdrawalRatePct">
+              <FieldLabel
+                htmlFor="withdrawalRatePct"
+                className="text-sm sm:text-base"
+              >
                 Withdrawal Rate (%)
               </FieldLabel>
               <FieldContent>
@@ -229,6 +252,7 @@ export default function TargetPortfolio() {
                   id="withdrawalRatePct"
                   inputMode="decimal"
                   placeholder="4"
+                  className="text-base sm:text-base h-10 sm:h-9"
                   {...register("withdrawalRatePct", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -243,52 +267,74 @@ export default function TargetPortfolio() {
               </FieldContent>
             </Field>
 
-            <Field>
-              <FieldLabel htmlFor="retirementYear">Retirement Year</FieldLabel>
-              <FieldContent>
-                <Input
-                  aria-invalid={!!errors.retirementYear}
-                  id="retirementYear"
-                  inputMode="numeric"
-                  placeholder="2040"
-                  {...register("retirementYear", {
-                    setValueAs: (v) => asNumber(String(v)),
-                  })}
-                />
-                <FieldError
-                  errors={
-                    errors.retirementYear ? [errors.retirementYear] : undefined
-                  }
-                />
-              </FieldContent>
-            </Field>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <Field>
+                <FieldLabel
+                  htmlFor="retirementYear"
+                  className="text-sm sm:text-base"
+                >
+                  Retirement Year
+                </FieldLabel>
+                <FieldContent>
+                  <Input
+                    aria-invalid={!!errors.retirementYear}
+                    id="retirementYear"
+                    inputMode="numeric"
+                    placeholder="2040"
+                    className="text-base sm:text-base h-10 sm:h-9"
+                    {...register("retirementYear", {
+                      setValueAs: (v) => asNumber(String(v)),
+                    })}
+                  />
+                  <FieldError
+                    errors={
+                      errors.retirementYear
+                        ? [errors.retirementYear]
+                        : undefined
+                    }
+                  />
+                </FieldContent>
+              </Field>
+
+              <Field>
+                <FieldLabel
+                  htmlFor="targetYear"
+                  className="text-sm sm:text-base"
+                >
+                  Target Year
+                </FieldLabel>
+                <FieldContent>
+                  <Input
+                    aria-invalid={!!errors.targetYear}
+                    id="targetYear"
+                    inputMode="numeric"
+                    placeholder="2050"
+                    className="text-base sm:text-base h-10 sm:h-9"
+                    {...register("targetYear", {
+                      setValueAs: (v) => asNumber(String(v)),
+                    })}
+                  />
+                  <FieldError
+                    errors={errors.targetYear ? [errors.targetYear] : undefined}
+                  />
+                </FieldContent>
+              </Field>
+            </div>
 
             <Field>
-              <FieldLabel htmlFor="targetYear">Target Year</FieldLabel>
-              <FieldContent>
-                <Input
-                  aria-invalid={!!errors.targetYear}
-                  id="targetYear"
-                  inputMode="numeric"
-                  placeholder="2050"
-                  {...register("targetYear", {
-                    setValueAs: (v) => asNumber(String(v)),
-                  })}
-                />
-                <FieldError
-                  errors={errors.targetYear ? [errors.targetYear] : undefined}
-                />
-              </FieldContent>
-            </Field>
-
-            <Field>
-              <FieldLabel htmlFor="inflationPct">Inflation (%/yr)</FieldLabel>
+              <FieldLabel
+                htmlFor="inflationPct"
+                className="text-sm sm:text-base"
+              >
+                Inflation (%/yr)
+              </FieldLabel>
               <FieldContent>
                 <Input
                   aria-invalid={!!errors.inflationPct}
                   id="inflationPct"
                   inputMode="decimal"
                   placeholder="3"
+                  className="text-base sm:text-base h-10 sm:h-9"
                   {...register("inflationPct", {
                     setValueAs: (v) => asNumber(String(v)),
                   })}
@@ -304,21 +350,27 @@ export default function TargetPortfolio() {
 
           <Alert
             aria-live="polite"
-            className="bg-blue-50 text-blue-950 border-blue-200 text-left"
+            className="bg-blue-50 text-blue-950 border-blue-200 text-left shadow-sm"
             role="status"
           >
-            <Info className="h-4 w-4" />
-            <AlertTitle className="font-semibold text-left">Result</AlertTitle>
-            <AlertDescription className="text-left">
-              <div className="mt-2 text-lg font-bold">
+            <Info className="h-4 w-4 sm:h-5 sm:w-5 shrink-0 mt-0.5" />
+            <AlertTitle className="font-semibold text-left text-base sm:text-lg">
+              Result
+            </AlertTitle>
+            <AlertDescription className="text-left space-y-2 sm:space-y-2.5">
+              <div className="mt-2 sm:mt-3 text-base sm:text-lg font-bold break-words">
                 Portfolio needed at retirement:{" "}
-                {currency(Math.max(0, result.Pneeded))}
+                <span className="text-blue-700">
+                  {currency(Math.max(0, result.Pneeded))}
+                </span>
               </div>
-              <div className="text-sm text-gray-600">
+              <div className="text-sm sm:text-base text-gray-700 font-medium">
                 Year 1 withdrawal ({v.retirementYear}):{" "}
-                {currency(Math.max(0, result.year1Withdrawal))}
+                <span className="text-blue-700">
+                  {currency(Math.max(0, result.year1Withdrawal))}
+                </span>
               </div>
-              <div className="text-sm text-gray-600 mt-1">
+              <div className="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-2.5 leading-relaxed">
                 {result.explainer}
               </div>
             </AlertDescription>

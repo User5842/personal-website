@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { Calculator, Twitter, Youtube } from "@lucide/astro";
+import { Calculator, PiggyBank, Twitter, Youtube } from "@lucide/astro";
 
 import profileImage from "../assets/me.png";
 import "../styles/global.css";
@@ -29,6 +29,7 @@ import "../styles/global.css";
       <p class="mt-2 text-gray-600 max-w-md text-base sm:text-lg md:text-xl">
         My little nook of the internet.
       </p>
+
       <section class="mt-10 w-full max-w-3xl">
         <h2 class="font-bold text-xl sm:text-2xl text-gray-900">Projects</h2>
         <p class="mt-2 text-gray-600 text-sm sm:text-base max-w-md mx-auto">
@@ -46,12 +47,24 @@ import "../styles/global.css";
           >
             <Calculator class="w-5 h-5 text-blue-600" />
             <span class="font-medium text-sm sm:text-base text-left">
-              4% Retirement Calculators
+              4 percent Retirement Calculators
+            </span>
+          </a>
+
+          <a
+            class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200 p-4 text-gray-700 hover:text-gray-900"
+            href="/savings-roi"
+          >
+            <PiggyBank class="w-5 h-5 text-green-600" />
+            <span class="font-medium text-sm sm:text-base text-left">
+              Savings From Budget Cuts
             </span>
           </a>
         </div>
       </section>
+
       <hr class="mt-10 mb-8 w-16 border-t-2 border-gray-200" />
+
       <div class="mt-6 flex gap-6">
         <a
           aria-label="YouTube"
@@ -62,6 +75,7 @@ import "../styles/global.css";
         >
           <Youtube class="w-6 h-6 sm:w-7 sm:h-7" />
         </a>
+
         <a
           aria-label="X (Twitter)"
           class="text-gray-600 hover:text-blue-500 transition-colors duration-300"
