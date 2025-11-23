@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { Calculator, PiggyBank, Twitter, Youtube } from "@lucide/astro";
+import SEO from "../components/SEO.astro";
 
 import profileImage from "../assets/me.png";
 import "../styles/global.css";
@@ -8,9 +9,10 @@ import "../styles/global.css";
 
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Rafael Negron</title>
+    <SEO
+      title="Rafael Negron"
+      description="Personal website of Rafael Negron. Projects, tools, and experiments."
+    />
   </head>
   <body class="bg-gray-50 text-gray-800">
     <main
@@ -79,7 +81,7 @@ import "../styles/global.css";
         <a
           aria-label="X (Twitter)"
           class="text-gray-600 hover:text-blue-500 transition-colors duration-300"
-          href="https://x.com/inquisitivefin"
+          href="https://x.com/RafaelNegronX"
           rel="noopener noreferrer"
           target="_blank"
         >

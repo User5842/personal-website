@@ -252,6 +252,7 @@ export default function SavingsFromCuts() {
                         ref={(el) => {
                           nameInputRefs.current[row.id] = el;
                         }}
+                        aria-label="Item name"
                         placeholder="Example: Streaming service"
                         value={row.name}
                         onChange={(e) =>
@@ -297,6 +298,7 @@ export default function SavingsFromCuts() {
                           <Input
                             className="max-w-[120px] text-right"
                             inputMode="decimal"
+                            aria-label="Monthly amount"
                             placeholder="0"
                             value={row.amount}
                             onChange={(e) =>
@@ -365,6 +367,7 @@ export default function SavingsFromCuts() {
             <Input
               className="mx-auto w-full max-w-xs text-right sm:w-20 sm:max-w-none"
               inputMode="decimal"
+              aria-label="Average annual return percentage"
               placeholder="8"
               value={rateInput}
               onChange={(e) => setRateInput(e.target.value)}
@@ -383,6 +386,7 @@ export default function SavingsFromCuts() {
             <Input
               className="mx-auto w-full max-w-xs text-right sm:w-20 sm:max-w-none"
               inputMode="numeric"
+              aria-label="Time horizon in years"
               placeholder="10"
               value={yearsInput}
               onChange={(e) => setYearsInput(e.target.value)}
